@@ -8,6 +8,8 @@ class ImageAssets{
   static const String appBarImg ="$imagePath/AppBar_Img.png";
   static const String loginView ="$imagePath/Login_img.png";
   static const String loginFont ="$imagePath/Loginfont.png";
+  static const String dropDownIcon ="$imagePath/dropdownIcon.png";
+  static const String choosePhoto ="$imagePath/choosePhoto.png";
 
 
 

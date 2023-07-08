@@ -5,10 +5,11 @@ import '../../presentation/resources/styles_manager.dart';
 import '../../presentation/resources/values_manager.dart';
 
 class customButton extends StatelessWidget {
-  customButton({this.onTap,this.preIcon, required this.textColor,required this.text,required this.color}) ;
+  customButton({this.onTap,this.preIcon,this.iconColor, required this.textColor,required this.text,required this.color}) ;
   String text;
   VoidCallback? onTap;
   Color color;
+  Color? iconColor;
   IconData? preIcon;
   Color textColor;
   @override
@@ -31,6 +32,7 @@ class customButton extends StatelessWidget {
                 padding: const EdgeInsets.only(right: AppSize.s15),
                 child: Icon(
                   preIcon,
+                  color: iconColor,
                 ),
               ),
             ),

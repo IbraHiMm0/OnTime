@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ontimeapp/presentation/resources/color_manager.dart';
+import 'package:ontimeapp/presentation/resources/string_manager.dart';
 
 import '../../presentation/resources/styles_manager.dart';
 import '../../presentation/resources/values_manager.dart';
@@ -24,40 +25,44 @@ class customField extends StatelessWidget {
     return Column(
       children: [
         Container(
-          color: Colors.grey[200],
-
+          decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(8)
+          ),
           child: TextFormField(
+
             inputFormatters: [
               LengthLimitingTextInputFormatter(numForm),
             ],
             keyboardType: keyboardType,
             controller: controller,
             obscureText: obs!,
+
             validator: valid,
             cursorColor: ColorManager.lightGrey,
             style:  getRegularStyle(
               color: ColorManager.grey,
-              fontSize: AppSize.s18,
+              fontSize: AppSize.s16,
             ),
             onChanged: onChanged,
             decoration: InputDecoration(
+              errorStyle:   TextStyle(color: Colors.red,backgroundColor: ColorManager.whiteF5,fontFamily: "NunitoSans",fontWeight: FontWeight.w600,),
               prefixIcon: icon,
               hintText: hintText,
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide.none),
               hintStyle:  getRegularStyle(color: ColorManager.lightGrey,
                 fontSize: AppSize.s16,
                   ),
-              disabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(100)
-
+              prefixText: AppStrings.space,
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.grey.shade50,
+                ),
               ),
-              // enabledBorder: OutlineInputBorder(
-              //   borderSide: BorderSide(
-              //     color: ColorManager.whiteF5,
-              //   ),
-              //   borderRadius: BorderRadius.circular(12),
-              // ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Colors.grey.shade50,
+                ),
+              ),
               //when i see field
               // focusedBorder: OutlineInputBorder(
               //   borderSide: BorderSide(

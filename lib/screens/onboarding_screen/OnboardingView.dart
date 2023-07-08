@@ -7,7 +7,6 @@ import '../../presentation/resources/routes_manager.dart';
 import '../../presentation/resources/string_manager.dart';
 import '../../presentation/resources/styles_manager.dart';
 import '../../presentation/resources/values_manager.dart';
-import '../components/customButtonView.dart';
 
 class BoardingModel {
   final String image;
@@ -205,35 +204,5 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             textAlign: TextAlign.center,
           ),
         ],
-        // onPressed: () {
-        //   if (isLast) {
-        //     submit();
-        //     changeText();
-        //   } else {
-        //     boardController.nextPage(
-        //       duration: const Duration(
-        //         milliseconds: AppConstants.onboardingTime,
-        //       ),
-        //       curve: Curves.fastOutSlowIn,
-        //     );
-        //   }
-        // },
-        // child: Row(
-        //   children: [
-        //     Text(
-        //       text,
-        //       style: getBoldStyle(
-        //           color: ColorManager.black,
-        //           fontSize: AppSize.s18),
-        //     ),
-        //     const SizedBox(
-        //       width: AppSize.s8,
-        //     ),
-        //     Icon(
-        //       color: ColorManager.black,
-        //       Icons.arrow_forward_ios,
-        //     )
-        //   ],
-        // ),
       ); // widget item
 }

@@ -16,21 +16,29 @@ class PhoneOptionView extends StatefulWidget {
 
 class _PhoneOptionViewState extends State<PhoneOptionView> {
   void back() {
-    Navigator.pushReplacementNamed(context, Routes.forgotPassword); // goto screen
+    Navigator.pushReplacementNamed(
+        context, Routes.forgotPassword); // goto screen
   }
+
+  GlobalKey<FormState> formKey = GlobalKey();
 
   int _currentStep = 0;
 
   final List<Step> _steps = [
     Step(
       title: const Text(''),
+
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(
             height: AppSize.s60,
           ),
-          Text(AppStrings.enterPhone1,style: getBoldStyle(color: ColorManager.black,fontSize: AppSize.s20),),
+          Text(
+            AppStrings.enterPhone1,
+            style:
+                getBoldStyle(color: ColorManager.black, fontSize: AppSize.s20),
+          ),
           const SizedBox(
             height: AppSize.s10,
           ),
@@ -38,8 +46,7 @@ class _PhoneOptionViewState extends State<PhoneOptionView> {
             textAlign: TextAlign.center,
             AppStrings.confirmPhone,
             style: getSemiBoldStyle(
-                color: ColorManager.grey,
-                fontSize: AppSize.s16),
+                color: ColorManager.grey, fontSize: AppSize.s16),
           ),
           const SizedBox(
             height: AppSize.s24,
@@ -50,31 +57,40 @@ class _PhoneOptionViewState extends State<PhoneOptionView> {
               inputFormatters: [
                 LengthLimitingTextInputFormatter(11),
               ],
+              validator: (value) {
+                String pattern =
+                    r'^(01)[0-9]{9}$'; //must enter 01 and 11 num
+                RegExp regExp = RegExp(pattern);
+
+                if (value!.isEmpty) {
+                  return 'Phone Number is Required';
+                } else if (!regExp.hasMatch(value)) {
+                  return 'Please enter valid mobile number';
+                }
+                return null;
+              },
               keyboardType: TextInputType.phone,
               cursorColor: ColorManager.lightGrey,
-              style:  getRegularStyle(
+              style: getRegularStyle(
                 color: ColorManager.grey,
                 fontSize: AppSize.s16,
               ),
-
               decoration: InputDecoration(
-
-                hintText: AppStrings.phoneNumber,
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10)
-
-                ),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10)
-
-                ),
-
+                errorStyle: TextStyle(
+                  color: Colors.red,
+                  backgroundColor: ColorManager.white,
+                  fontFamily: "NunitoSans",
+                  fontWeight: FontWeight.w600,
+                ),                hintText: AppStrings.phoneNumber,
+                enabledBorder:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                focusedBorder:
+                    OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
               ),
             ),
           ),
         ],
       ),
-
     ),
     Step(
       title: const Text(''),
@@ -85,7 +101,11 @@ class _PhoneOptionViewState extends State<PhoneOptionView> {
           const SizedBox(
             height: AppSize.s60,
           ),
-          Text(AppStrings.enterVer,style: getBoldStyle(color: ColorManager.black,fontSize: AppSize.s20),),
+          Text(
+            AppStrings.enterVer,
+            style:
+                getBoldStyle(color: ColorManager.black, fontSize: AppSize.s20),
+          ),
           const SizedBox(
             height: AppSize.s10,
           ),
@@ -93,8 +113,7 @@ class _PhoneOptionViewState extends State<PhoneOptionView> {
             textAlign: TextAlign.center,
             AppStrings.weHaveSentPhone,
             style: getRegularStyle(
-                color: ColorManager.grey,
-                fontSize: AppSize.s14),
+                color: ColorManager.grey, fontSize: AppSize.s14),
           ),
           const SizedBox(
             height: AppSize.s24,
@@ -103,10 +122,9 @@ class _PhoneOptionViewState extends State<PhoneOptionView> {
             onCompleted: (pin) => print(pin),
             length: 4,
             validator: (value) {
-              if(value!.isEmpty){
+              if (value!.isEmpty) {
                 return 'Pin Number is Required';
-              }
-              else if(value.length <= 3){
+              } else if (value.length <= 3) {
                 return 'Pin Number should contain 4 characters';
               }
               return null;
@@ -142,97 +160,120 @@ class _PhoneOptionViewState extends State<PhoneOptionView> {
                   )),
             ],
           ),
-
         ],
       ),
-
     ),
-
   ];
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                IconButton(
-                  onPressed: (){
-                    back();
-                  },
-                  icon: const Icon(
-                      Icons.arrow_back_ios_rounded
+    return Form(
+      key: formKey,
+      child: Scaffold(
+        appBar: AppBar(
+          actions: [
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      back();
+                    },
+                    icon: const Icon(Icons.arrow_back_ios_rounded),
+                    color: ColorManager.whiteF5,
                   ),
-                  color: ColorManager.whiteF5,
-
-                ),
-                const SizedBox(
-                  width: AppSize.s70,
-                ),
-
-                Text(AppStrings.forgotPass,style: getSemiBoldStyle(color: ColorManager.white,fontSize: AppSize.s18),),
-              ],
+                  const SizedBox(
+                    width: AppSize.s70,
+                  ),
+                  Text(
+                    AppStrings.forgotPass,
+                    style: getSemiBoldStyle(
+                        color: ColorManager.white, fontSize: AppSize.s18),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-        backgroundColor: ColorManager.primary,
-        systemOverlayStyle:  SystemUiOverlayStyle(
-            statusBarColor: ColorManager.primary,
-            statusBarBrightness: Brightness.light
+          ],
+          backgroundColor: ColorManager.primary,
+          systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: ColorManager.primary,
+              statusBarBrightness: Brightness.light),
+        ),
+        backgroundColor: ColorManager.white,
+        body: Stepper(
+          physics: const BouncingScrollPhysics(),
+          currentStep: _currentStep,
+          steps: _steps,
+
+          connectorThickness: 8,
+          connectorColor: MaterialStateProperty.resolveWith((states) => getColor(states, _currentStep, _steps)),
+          controlsBuilder: (ctx, details) {
+            if (_currentStep == _steps.length - 1) {
+              return Column(
+                children: [
+                  const SizedBox(
+                    height: AppSize.s160,
+                  ),
+                  customButton(
+                    onTap: () {
+                      // if (formKey.currentState!.validate()) {
+                        setState(() {
+                          if (_currentStep < _steps.length - 1) {
+                            _currentStep++;
+                          }
+                        });
+                      // }
+                    },
+                    text: AppStrings.verfiy,
+                    textColor: ColorManager.white,
+                    color: ColorManager.primary,
+                  ),
+                ],
+              );
+            } else {
+              return Column(
+                children: [
+                  const SizedBox(
+                    height: AppSize.s250,
+                  ),
+                  customButton(
+                    onTap: () {
+                      // if (formKey.currentState!.validate()) {
+                        setState(() {
+                          if (_currentStep < _steps.length - 1) {
+                            _currentStep++;
+                          }
+                        });
+                      // }
+                    },
+                    text: AppStrings.submit.toUpperCase(),
+                    textColor: ColorManager.white,
+                    color: ColorManager.primary,
+                  ),
+                ],
+              );
+            }
+          },
         ),
       ),
-      backgroundColor: ColorManager.white,
-      body: Stepper(
-        physics: const BouncingScrollPhysics(),
-        currentStep: _currentStep,
-        steps: _steps,
-        controlsBuilder: (ctx, details) {
-          if(_currentStep==_steps.length-1){
-            return  Column(
-              children: [
-                const SizedBox(
-                  height: AppSize.s160,
-                ),
-                customButton(
-                  onTap: () {
-                    setState(() {
-                      if (_currentStep < _steps.length - 1) {
-                        _currentStep++;
-                      }
-                    });
-                  },
-                  text:AppStrings.verfiy,
-                  textColor: ColorManager.white,
-                  color: ColorManager.primary,
-                ),
-              ],
-            );
-          }
-          else{
-            return Column(
-              children: [
-                const SizedBox(
-                  height: AppSize.s250,
-                ),
-                customButton(
-                  onTap: () {
-                    setState(() {
-                      if (_currentStep < _steps.length - 1) {
-                        _currentStep++;
-                      }
-                    });
-                  },
-                  text:AppStrings.submit.toUpperCase(),
-                  textColor: ColorManager.white,
-                  color: ColorManager.primary,
-                ),
-              ],
-            );
-          }
-        },
-      ),
     );
+  }
+  Color getColor(Set<MaterialState> states, int currentStep, List _steps) {
+    const Set<MaterialState> interactiveStates = <MaterialState>{
+      MaterialState.pressed,
+      MaterialState.hovered,
+      MaterialState.focused,
+    };
+
+    if (states.any(interactiveStates.contains)) {
+      return Colors.blue;
+    }
+
+    if (_currentStep == _steps.length-1) {
+      return ColorManager.primary;
+    }
+
+    return Colors.green;
   }
 }
