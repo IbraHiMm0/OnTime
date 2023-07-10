@@ -12,13 +12,12 @@ import '../../presentation/resources/string_manager.dart';
 import '../../presentation/resources/styles_manager.dart';
 import '../../presentation/resources/values_manager.dart';
 import '../components/customButtonView.dart';
-import 'EmailOptionNum2View.dart';
 
-class EmailOptionView extends StatelessWidget {
+class EmailOptionNum2View extends StatelessWidget {
 
   final GlobalKey<FormState> formKey = GlobalKey();
 
-  EmailOptionView({super.key});
+  EmailOptionNum2View({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -82,23 +81,23 @@ class EmailOptionView extends StatelessWidget {
                                 width: 30,
 
                                 decoration: BoxDecoration(
-                                  color: ColorManager.lightPrimary,
+                                  color: ColorManager.green,
                                   shape: BoxShape.circle,
                                 ),
-                                child: Center(child: Text("01",style: getBoldStyle(color: ColorManager.titleBlack,fontSize: AppSize.s14),)),
+                                child: Center(child: Text("01",style: getBoldStyle(color: ColorManager.white,fontSize: AppSize.s14),)),
                               ),
                             ],
                           ),
                           Row(
                             children: [
                               Container(
-                                height: 350,
+                                height: 380,
                                 margin: const EdgeInsets.only(left: 18),
                                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
                                 decoration:  BoxDecoration(
                                     border: Border(
                                         left: BorderSide(
-                                          color: ColorManager.lightPrimary,
+                                          color: ColorManager.green,
                                           width: 10,
                                         ))
                                 ),
@@ -112,53 +111,63 @@ class EmailOptionView extends StatelessWidget {
                                       const SizedBox(
                                         height: AppSize.s60,
                                       ),
-                                      Text(AppStrings.enterEmail1,style: getBoldStyle(color: ColorManager.black,fontSize: AppSize.s20),),
+                                      Text(AppStrings.enterVer,style: getBoldStyle(color: ColorManager.black,fontSize: AppSize.s20),),
                                       const SizedBox(
                                         height: AppSize.s10,
                                       ),
                                       Text(
                                         textAlign: TextAlign.center,
-                                        AppStrings.confirmMsg,
-                                        style: getSemiBoldStyle(
+                                        AppStrings.weHaveSent,
+                                        style: getRegularStyle(
                                             color: ColorManager.grey,
-                                            fontSize: AppSize.s16),
+                                            fontSize: AppSize.s14),
                                       ),
                                       const SizedBox(
                                         height: AppSize.s24,
                                       ),
-                                      SizedBox(
-                                        height: 54,
-                                        child: TextFormField(
-                                          inputFormatters: [
-                                            LengthLimitingTextInputFormatter(24),
-                                          ],
-                                          keyboardType: TextInputType.emailAddress,
-                                          cursorColor: ColorManager.lightGrey,
-                                          style:  getRegularStyle(
-                                            color: ColorManager.grey,
-                                            fontSize: AppSize.s18,
-                                          ),
-                                          validator: (value) {
-                                            if (value!.isEmpty) {
-                                              return AppStrings.emailReqOP;
-                                            }
-                                            return null;
-                                          },
-                                          decoration: InputDecoration(
-
-                                            hintText: AppStrings.email,
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(10)
-
-                                            ),
-                                            focusedBorder: OutlineInputBorder(
-                                                borderRadius: BorderRadius.circular(10)
-
-                                            ),
-
-                                          ),
-                                        ),
+                                      Pinput(
+                                        onCompleted: (pin) => print(pin),
+                                        length: 4,
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return AppStrings.pinReq;
+                                          } else if (value.length <= 3) {
+                                            return AppStrings.pinShould;
+                                          }
+                                          return null;
+                                        },
                                       ),
+                                      const SizedBox(
+                                        height: AppSize.s10,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            AppStrings.dontGetCode,
+                                            style: getRegularStyle(
+                                                color: ColorManager.lightGrey, fontSize: AppSize.s16),
+                                          ),
+                                          const SizedBox(
+                                            width: AppSize.s8,
+                                          ),
+                                          InkWell(
+                                              onTap: () {
+                                                Builder(
+                                                  builder: (BuildContext context) {
+                                                    // Navigator.pushReplacementNamed(context, Routes.registerRoute);
+                                                    return Container(); // Placeholder container
+                                                  },
+                                                );
+                                              },
+                                              child: Text(
+                                                AppStrings.resend,
+                                                style: getBoldStyle(
+                                                    color: ColorManager.primary, fontSize: AppSize.s16),
+                                              )),
+                                        ],
+                                      ),
+
                                     ],
                                   ),
                                 ),
@@ -176,10 +185,10 @@ class EmailOptionView extends StatelessWidget {
                             height: 30,
                             width: 30,
                             decoration: BoxDecoration(
-                              color: ColorManager.greyD,
+                              color: ColorManager.primary,
                               shape: BoxShape.circle,
                             ),
-                            child: Center(child: Text("02",style: getBoldStyle(color: ColorManager.titleBlack,fontSize: AppSize.s14),)),
+                            child: Center(child: Text("02",style: getBoldStyle(color: ColorManager.white,fontSize: AppSize.s14),)),
                           ),
                         ],
                       ),
@@ -190,7 +199,7 @@ class EmailOptionView extends StatelessWidget {
                         decoration:  BoxDecoration(
                             border: Border(
                                 left: BorderSide(
-                                  color: ColorManager.greyD,
+                                  color: ColorManager.primary,
                                   width: 10,
                                 ))),
                       ),
@@ -363,72 +372,7 @@ class EmailOptionView extends StatelessWidget {
 //     Step(
 //       title: const Text(''),
 //       isActive: true,
-//       content: Column(
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         children: [
-//           const SizedBox(
-//             height: AppSize.s60,
-//           ),
-//           Text(AppStrings.enterVer,style: getBoldStyle(color: ColorManager.black,fontSize: AppSize.s20),),
-//           const SizedBox(
-//             height: AppSize.s10,
-//           ),
-//           Text(
-//             textAlign: TextAlign.center,
-//             AppStrings.weHaveSent,
-//             style: getRegularStyle(
-//                 color: ColorManager.grey,
-//                 fontSize: AppSize.s14),
-//           ),
-//           const SizedBox(
-//             height: AppSize.s24,
-//           ),
-//           Pinput(
-//             onCompleted: (pin) => print(pin),
-//             length: 4,
-//             validator: (value) {
-//               if(value!.isEmpty){
-//                 return 'Pin Number is Required';
-//               }
-//               else if(value.length <= 3){
-//                 return 'Pin Number should contain 4 characters';
-//               }
-//               return null;
-//             },
-//           ),
-//           const SizedBox(
-//             height: AppSize.s10,
-//           ),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               Text(
-//                 AppStrings.dontGetCode,
-//                 style: getRegularStyle(
-//                     color: ColorManager.lightGrey, fontSize: AppSize.s16),
-//               ),
-//               const SizedBox(
-//                 width: AppSize.s8,
-//               ),
-//               InkWell(
-//                   onTap: () {
-//                     Builder(
-//                       builder: (BuildContext context) {
-//                         // Navigator.pushReplacementNamed(context, Routes.registerRoute);
-//                         return Container(); // Placeholder container
-//                       },
-//                     );
-//                   },
-//                   child: Text(
-//                     AppStrings.resend,
-//                     style: getBoldStyle(
-//                         color: ColorManager.primary, fontSize: AppSize.s16),
-//                   )),
-//             ],
-//           ),
-//
-//         ],
-//       ),
+//       content:
 //
 //     ),
 //   ];

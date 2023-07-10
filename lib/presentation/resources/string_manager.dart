@@ -57,8 +57,11 @@ class AppStrings {
   static const uTyped = 'You typed a few character';
   static const enterVEmail = 'Please enter your email';
   static const emailReq = '   E-mail is Required';
+  static const emailReqOP = 'E-mail is Required';
   static const phoneReq = '   Phone Number is Required';
+  static const phoneReqOP = 'Phone Number is Required';
   static const validMobReq = '   Please enter valid mobile number';
+  static const validMobReqOP = 'Please enter valid mobile number';
   static const makeSure = 'Make sure to choose from department section';
   static const passReq = '   Password is Required';
   static const valid8char = '   Password should contain more than 8 characters';
@@ -67,6 +70,8 @@ class AppStrings {
   static const repeatPass = 'Please repeat your password';
   static const repeatPassReq = '   Repeat Password is Required';
   static const passNotMatching = '   The Password Not Matching';
+  static const pinReq = 'Pin Number is Required';
+  static const pinShould = 'Pin Number should contain 4 characters';
 
 
   // Create Prof ♦

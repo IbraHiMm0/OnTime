@@ -4,6 +4,7 @@ import 'package:ontimeapp/screens/Create_Profile/createProfileView.dart';
 import 'package:ontimeapp/screens/Login_screen/LoginView.dart';
 import 'package:ontimeapp/screens/Register_Screen/Register.dart';
 import 'package:ontimeapp/screens/choose_email/EmailOptionView.dart';
+import 'package:ontimeapp/screens/choose_phone/PhoneOptionNum2.dart';
 import 'package:ontimeapp/screens/forget_password_screen/forgotPasswordView.dart';
 import 'package:ontimeapp/screens/onboarding_screen/OnboardingView.dart';
 
@@ -19,6 +20,7 @@ class Routes {
   static const String chooseEmail = "/chooseEmail";
   static const String choosePhone = "/choosePhone";
   static const String createProfile = "/createProfile";
+  static const String choosePhoneNum2 = "/choosePhoneNum2";
 
 }
 
@@ -41,6 +43,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) =>  PhoneOptionView());
       case Routes.createProfile:
         return MaterialPageRoute(builder: (_) =>   CreateProfileView());
+      case Routes.choosePhoneNum2:
+        return MaterialPageRoute(builder: (_) =>   PhoneOptionNum2View());
       default:
         return unDefinedRoute();
     }

@@ -22,7 +22,7 @@ class _SplashViewState extends State<SplashView> {
   }
 
   _goNext() {
-    Navigator.pushReplacementNamed(context, Routes.forgotPassword);
+    Navigator.pushReplacementNamed(context, Routes.onboardingRoute);
   }
 
   @override
